@@ -1,5 +1,9 @@
+// Michael Trinh
+// BladeCord
+
 const Discord = require('discord.js');
-const token = 'NDk0MzY2ODYzNzkxMjI2ODgw.DoyfwA.MC4EzbrNRCyFEREVlwLTT8tACI8';
+const CardModule = require('./card.js');
+const token = <token>;
 const client = new Discord.Client();
 const prefix = '!';
 
@@ -35,6 +39,11 @@ client.on('message', function (message) {
         case 'test':
             message.channel.send('Hello World!');
             break;
+        // tests if the card module works as intended    
+        case 'cardTest':
+            var card = new CardModule(false,0,4);
+            message.channel.send(card.value);
+            break;    
         // starts a duel
         case 'duel':
             // gets the user first mentioned in the message
