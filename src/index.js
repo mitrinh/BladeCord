@@ -2,11 +2,14 @@
 // BladeCord
 
 const Discord = require('discord.js');
-const CardModule = require('./card.js');
-const token = <token>;
+const Card = require('./card.js');
+const Deck = require('./deck.js');
+const token = <token>
 const client = new Discord.Client();
 const prefix = '!';
 
+const cardTypes = 11; // 1-7, bolt, mirror, blast, force
+const numOfCopies = 4 // number of copies of each card in deck
 var err = 'error';
 
 /* 
@@ -40,10 +43,24 @@ client.on('message', function (message) {
             message.channel.send('Hello World!');
             break;
         // tests if the card module works as intended    
-        case 'cardTest':
-            var card = new CardModule(false,0,4);
+        case 'card':
+            var card = new Card(false,0,4);
             message.channel.send(card.value);
-            break;    
+            message.channel.send(card.isRegularCard());
+            break;  
+        // tests if the deck module works as intended   
+        case 'deck':
+            var deck = new Deck(cardTypes, numOfCopies);
+            deck.create();
+            // print deck
+            var printDeck = deck.contents[0].value + ', ';
+            console.log(deck.contents.length);
+            for(i = 1; i < deck.contents.length; i++) {
+                if (i == deck.contents.length-1) printDeck += deck.contents[i].value;
+                else printDeck += deck.contents[i].value + ', ';
+            }
+            message.channel.send(printDeck);
+            break;      
         // starts a duel
         case 'duel':
             // gets the user first mentioned in the message
