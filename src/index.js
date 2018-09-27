@@ -44,20 +44,18 @@ client.on('message', function (message) {
             break;
         // tests if the card module works as intended    
         case 'card':
-            var card = new Card(false,0,4);
+            var card = new Card(false,'regular',4);
             message.channel.send(card.value);
             message.channel.send(card.isRegularCard());
             break;  
         // tests if the deck module works as intended   
         case 'deck':
             var deck = new Deck(cardTypes, numOfCopies);
-            deck.create();
-            // print deck
-            var printDeck = deck.contents[0].value + ', ';
+            var printDeck = deck.contents[0].cardType + ', ';
             console.log(deck.contents.length);
-            for(i = 1; i < deck.contents.length; i++) {
-                if (i == deck.contents.length-1) printDeck += deck.contents[i].value;
-                else printDeck += deck.contents[i].value + ', ';
+            for(var i = 1; i < deck.contents.length; i++) {
+                if (i == deck.contents.length-1) printDeck += deck.contents[i].cardType;
+                else printDeck += deck.contents[i].cardType + ', ';
             }
             message.channel.send(printDeck);
             break;      
