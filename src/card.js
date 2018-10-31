@@ -4,7 +4,7 @@
 // class for card object
 class card {
     
-    // constructor
+    // initialize a card
     constructor(bolted, cardType, value) {
         // true when hit by bolt
         this.bolted = bolted;

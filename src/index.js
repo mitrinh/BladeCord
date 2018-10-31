@@ -2,15 +2,12 @@
 // BladeCord
 
 const Discord = require('discord.js');
-const Card = require('./card.js');
-const Deck = require('./deck.js');
-const token = <token>
+const Duel = require('./duel');
+const token = '<token>';
 const client = new Discord.Client();
 const prefix = '!';
 
-const cardTypes = 11; // 1-7, bolt, mirror, blast, force
-const numOfCopies = 4 // number of copies of each card in deck
-var err = 'error';
+var err = 'error'; // error code
 
 /* 
 notifies user when bot has turned on 
@@ -27,6 +24,9 @@ function printError() {
     console.error('An error has occured: ', err, '.');    
 } // end printError
 
+// make duel object
+var duel = new Duel();
+
 /* 
 allows user to enter commands for bot 
 */
@@ -37,43 +37,42 @@ client.on('message', function (message) {
     var args = message.content.substring(prefix.length).split(' ');
     author = message.guild.member(message.author);
     console.log(author.nickname, ': ', message.content.toString());
+    /*
+        check if in duel, add code here
+    */
+    //else do this when not in a duel
     switch(args[0].toLowerCase()) {
         // prints hello world 
         case 'test':
             message.channel.send('Hello World!');
             break;
-        // tests if the card module works as intended    
-        case 'card':
-            var card = new Card(false,'regular',4);
-            message.channel.send(card.value);
-            message.channel.send(card.isRegularCard());
-            break;  
         // tests if the deck module works as intended   
         case 'deck':
-            var deck = new Deck(cardTypes, numOfCopies);
-            var printDeck = deck.contents[0].cardType + ', ';
-            console.log(deck.contents.length);
-            for(var i = 1; i < deck.contents.length; i++) {
-                if (i == deck.contents.length-1) printDeck += deck.contents[i].cardType;
-                else printDeck += deck.contents[i].cardType + ', ';
-            }
-            message.channel.send(printDeck);
-            break;      
+            message.channel.send("deck: " + duel.printDeck());
+            break;   
+        // tests if the hand module works as intended   
+        case 'hand':
+            message.channel.send("hand 1: " + duel.printHand1());
+            message.channel.send("hand 2: " + duel.printHand2());
+            message.channel.send("deck: " + duel.printDeck());
+            break;          
         // starts a duel
         case 'duel':
+            
             // gets the user first mentioned in the message
-            const user = message.mentions.users.first();
-            const member = message.guild.member(user);
-            if (args[1] == member) {    
-                message.channel.send(user + ' has been challenged!');
+            // const user = message.mentions.users.first();
+            // const member = message.guild.member(user);
+            // if (args[1] == member) {    
+            //     message.channel.send(user + ' has been challenged!');
 
-                /* code for duel here */
+            //     /* code for duel here */
 
-            }
-            else message.reply('usage: !duel <user>');
+            // }
+            // else message.reply('usage: !duel <user>');
             break;
         // turns bot off     
         case 'quit':
+            message.channel.send(":wave: :slight_smile:");
             client.destroy();
             break;
         // gives message on how to use commands    
