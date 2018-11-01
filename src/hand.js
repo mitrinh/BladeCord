@@ -15,21 +15,32 @@ class hand {
     create(deck, quantity) {
         var card;
         for(var i = 0; i < quantity; i++){
-            card = deck[deck.length-1]
+            card = deck[deck.length-1];
             this.contents.push(card);
             deck.pop();
         }
     } // end create
 
+    // check if hand is empty
+    empty() {
+        return (this.contents === undefined || this.contents.length == 0)
+    } // end empty
+
     // print the hand
     print() {
-        var output = this.contents[0].cardType + ', ';
-        const length = this.contents.length;
-        for (var i = 1; i < length; i++) {
-            if (i == length-1) output += this.contents[i].cardType;
-            else output += this.contents[i].cardType + ', ';
+        var output;
+        // check if hand is empty or not
+        if(!this.empty()){
+            output = this.contents[0].cardType;
+            const length = this.contents.length;
+            for (var i = 1; i < length; i++) {
+                output += ', ' + this.contents[i].cardType;
+            }
         }
-        console.log("hand: " + output);
+        else {
+            output = "empty";
+        }
+        console.log("\t hand: " + output);
         return output;
     } // end print
 

@@ -11,30 +11,39 @@ const startHandQuantity = 10; // number of cards a player has a start of game
 
 // class for duel object
 class duel {
-
     // initalize the duel
     constructor() {
+        // result flag returns whether player 1 inGame, won, lost, or draw
+        this.result = "inGame";
         // makes deck for duel
         this.deck = new Deck(cardTypes, numOfCopies);
         // makes hands for duel, pass the array of deck not the object
         this.hand1 = new Hand(this.deck.contents, startHandQuantity);
         this.hand2 = new Hand(this.deck.contents, startHandQuantity);
+        this.field1 = new Field();
+        this.field2 = new Field();
+        // initial values are 0, if value of both fields are equal do again
+        while(this.field1.value == this.field2.value) {
+            this.startField();
+        }
     } // end constructor
 
-    // prints the deck
-    printDeck() {
-        return this.deck.print();
-    } // end printDeck
-
-    // prints hand1
-    printHand1() {
-        return this.hand1.print();
-    } // end printHand1
-
-    // prints hand2
-    printHand2() {
-        return this.hand2.print();
-    } // end printHand2
+    // put the top card of the deck to each side of the field as the first card
+    start() {
+        this.field1.clear();
+        this.field2.clear();
+        // iterate adding a card to each field, return draw if deck is empty
+        for(var i = 0; i < 2 && !this.deck.empty(); i++) {
+            // top card is cloned to field 
+            if(i == 0) this.field1.startAdd(this.deck.contents[this.deck.contents.length-1]);
+            else if(i == 1) this.field2.startAdd(this.deck.contents[this.deck.contents.length-1]);
+            else {
+                this.result = "draw";
+            }
+            // discard card from deck
+            this.deck.contents.pop();
+        }
+    } // end start
 
 }
 

@@ -53,15 +53,25 @@ class deck {
         this.contents = deck;
     } // end setDeck
 
+    // check if deck is empty
+    empty() {
+        return (this.contents === undefined || this.contents.length == 0)
+    } // end empty
+
     // print the deck
     print() {
-        var output = this.contents[0].cardType + ', ';
-        const length = this.contents.length;
-        for(var i = 1; i < length; i++) {
-            if (i == length-1) output += this.contents[i].cardType;
-            else output += this.contents[i].cardType + ', ';
+        var output;
+        if(!this.empty()) {
+            output = this.contents[0].cardType;
+            const length = this.contents.length;
+            for (var i = 1; i < length; i++) {
+                output += ', ' + this.contents[i].cardType;
+            }
         }
-        console.log("deck: " + output);
+        else {
+            output = "empty";
+        }
+        console.log("\t deck: " + output);
         return output;
     } // end print
 

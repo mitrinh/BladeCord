@@ -48,14 +48,18 @@ client.on('message', function (message) {
             break;
         // tests if the deck module works as intended   
         case 'deck':
-            message.channel.send("deck: " + duel.printDeck());
+            message.channel.send("deck: " + duel.deck.print());
             break;   
         // tests if the hand module works as intended   
         case 'hand':
-            message.channel.send("hand 1: " + duel.printHand1());
-            message.channel.send("hand 2: " + duel.printHand2());
-            message.channel.send("deck: " + duel.printDeck());
-            break;          
+            message.channel.send("hand 1: " + duel.hand1.print());
+            message.channel.send("hand 2: " + duel.hand2.print());
+            break;
+        // tests if the field module works as intended 
+        case 'field':
+            message.channel.send("field 1: " + duel.field1.print());
+            message.channel.send("field 2: " + duel.field2.print());
+            break;               
         // starts a duel
         case 'duel':
             
