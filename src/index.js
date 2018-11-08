@@ -24,9 +24,6 @@ function printError() {
     console.error('An error has occured: ', err, '.');    
 } // end printError
 
-// make duel object
-var duel = new Duel();
-
 /* 
 allows user to enter commands for bot 
 */
@@ -62,7 +59,20 @@ client.on('message', function (message) {
             break;               
         // starts a duel
         case 'duel':
-            
+            // make duel object
+            duel = new Duel();
+            //this loop will be used when duel is in progress
+            while(duel.result == "inProgress") {
+                if(duel.playerTurn == 1) {
+                    message.channel.send("player " + duel.playerTurn + "'s turn.");
+                    duel.playerTurn = 2;
+                }
+                else {
+                    message.channel.send("player " + duel.playerTurn + "'s turn.");
+                    duel.playerTurn = 1;
+                }
+                duel.result = "stop";
+            }
             // gets the user first mentioned in the message
             // const user = message.mentions.users.first();
             // const member = message.guild.member(user);
