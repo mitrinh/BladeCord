@@ -1,2 +1,3 @@
 # BladeCord
-The card game based off "Blade II" in the 'Trails' video games used as a bot for discord. Developed using discord.js, Node.js, and ported C++ code I developed.
+2 Player Discord card game bot based off "Blade II" from a video game franchise. 
+Developed using discord.js, Node.js, and ported C++ code I recently created.
