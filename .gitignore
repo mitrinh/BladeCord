@@ -12,6 +12,9 @@
 # vscode
 .vscode
 
+# idea
+.idea
+
 # misc
 .DS_Store
 .env.local
@@ -25,3 +28,6 @@ BladeCord.bat
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# token
+bladecord token.txt
