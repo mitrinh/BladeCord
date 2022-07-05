@@ -2,7 +2,7 @@
   "name": "src",
   "version": "1.0.0",
   "dependencies": {
-    "@discordjs/opus": "^0.3.2",
+    "@discordjs/opus": "^0.8.0",
     "discord.js": "^12.3.1",
     "fs": "0.0.1-security",
     "underscore": "^1.11.0"
